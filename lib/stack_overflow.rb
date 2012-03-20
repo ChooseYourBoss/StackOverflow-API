@@ -49,8 +49,9 @@ module API
       get(@@URL + "users/#{user_id}/tags?key=#{@@API_KEY}")
     end
 
-    def self.get_tags
-      get(@@URL + "tags?key=#{@@API_KEY}")
+    def self.get_tags(options={})
+      page = options[:page] || 1
+      get(@@URL + "tags?key=#{@@API_KEY}&page=#{page}")
     end
 
     def self.get_tags_synonyms
