@@ -52,6 +52,7 @@ module API
     def self.get_tags(options={})
       page = options[:page] || 1
       get(@@URL + "tags?key=#{@@API_KEY}&page=#{page}")
+      JSON.parse(get(@@URL + "tags?key=#{@@API_KEY}&page=#{page}").body)
     end
 
     def self.get_tags_synonyms
