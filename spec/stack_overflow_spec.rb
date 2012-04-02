@@ -65,8 +65,12 @@ describe API::StackOverflow do
   describe "get tags" do
     before(:each) do
       @tags = API::StackOverflow.get_tags
+      @first_tag = @tags.first
     end
     it { @tags.should_not be_nil }
+    it { @first_tag.name.should eq("c#") }
+    it { @first_tag.count.should eq(285613) }
+    it { @first_tag.has_synonyms.should be_true }
     it { @tags.count.should > 0 }
   end
 
