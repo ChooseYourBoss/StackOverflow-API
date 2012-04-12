@@ -81,4 +81,14 @@ describe API::StackOverflow do
     it { @tags_synonyms.count.should > 0 }
   end
 
+  describe "get related tags" do 
+    before(:each) do
+      @tags_synonyms = API::StackOverflow.get_tags_related "html"
+    end
+    it { @tags_synonyms.should_not be_nil }
+    it { @tags_synonyms.count.should > 0 }
+    it { @tags_synonyms.include?(API::StackOverflow::Tag.new(name: "css")).should be_true }
+    it { @tags_synonyms.include?(API::StackOverflow::Tag.new(name: "porte")).should be_false }
+
+  end
 end

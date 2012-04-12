@@ -65,5 +65,11 @@ module API
       result = get(URI.escape(@@URL + "tags/#{tag}/synonyms?key=#{@@API_KEY}&site=#{site}"))
       result["items"].map{|t| Tag.new(t)}      
     end
+
+    def self.get_tags_related(tag, options={})
+      site = options[:site] || "stackoverflow"
+      result = get(URI.escape(@@URL + "tags/#{tag}/related?key=#{@@API_KEY}&site=#{site}"))
+      result["items"].map{|t| Tag.new(t)}      
+    end
   end
 end

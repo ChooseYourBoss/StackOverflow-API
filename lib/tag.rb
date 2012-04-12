@@ -1,6 +1,12 @@
 module API
   module StackOverflow
     class Tag
+      include Comparable
+
+      def <=>(anOther)
+        name <=> anOther.name
+      end
+
       attr_accessor :name, :count, :has_synonyms
 
       def initialize(so_tag)
