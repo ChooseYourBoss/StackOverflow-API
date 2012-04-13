@@ -79,16 +79,16 @@ describe API::StackOverflow do
     end
     it { @tags_synonyms.should_not be_nil }
     it { @tags_synonyms.count.should > 0 }
+    it { @tags_synonyms.include?(API::StackOverflow::Tag.new("name" =>"core-java")).should be_true }
   end
 
   describe "get related tags" do 
     before(:each) do
-      @tags_synonyms = API::StackOverflow.get_tags_related "html"
+      @tags_related = API::StackOverflow.get_tags_related "css"
     end
-    it { @tags_synonyms.should_not be_nil }
-    it { @tags_synonyms.count.should > 0 }
-    it { @tags_synonyms.include?(API::StackOverflow::Tag.new(name: "css")).should be_true }
-    it { @tags_synonyms.include?(API::StackOverflow::Tag.new(name: "porte")).should be_false }
-
+    it { @tags_related.should_not be_nil }
+    it { @tags_related.count.should > 0 }
+    it { @tags_related.include?(API::StackOverflow::Tag.new("name" => "html")).should be_true }
+    it { @tags_related.include?(API::StackOverflow::Tag.new("name" => "tagada")).should be_false }
   end
 end

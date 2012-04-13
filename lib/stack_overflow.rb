@@ -63,7 +63,7 @@ module API
     def self.get_tags_synonyms(tag, options={})
       site = options[:site] || "stackoverflow"
       result = get(URI.escape(@@URL + "tags/#{tag}/synonyms?key=#{@@API_KEY}&site=#{site}"))
-      result["items"].map{|t| Tag.new(t)}      
+      result["items"].map{|t| Tag.new("name" => t["from_tag"])}      
     end
 
     def self.get_tags_related(tag, options={})
