@@ -3,6 +3,7 @@ require 'json'
 require 'question'
 require 'answer'
 require 'tag'
+require 'item'
 
 module API
   module StackOverflow
@@ -60,10 +61,23 @@ module API
       result["items"].map{|t| Tag.new(t)}
     end
 
+    def self.get_synonyms(options={})
+      page = options[:page] || 1
+      site = options[:site] || "stackoverflow"
+
+      result = get(@@URL + "tags/synonyms?key=#{@@API_KEY}&page=#{page}&order=desc&sort=applied&site=#{site}")
+      result["items"].map{|t| 
+        item  = Item.new(from_tag:t["from_tag"], to_tag:t["from_tag"])
+        item
+      }
+    end
+
+    
+
     def self.get_tags_synonyms(tag, options={})
       site = options[:site] || "stackoverflow"
       result = get(URI.escape(@@URL + "tags/#{tag}/synonyms?key=#{@@API_KEY}&site=#{site}"))
-      result["items"].map{|t| Tag.new("name" => t["from_tag"])}      
+      result["items"].map{|t| Tag.new("name" => t["from_tag"]) }      
     end
 
     def self.get_tags_related(tag, options={})

@@ -91,4 +91,13 @@ describe API::StackOverflow do
     it { @tags_related.include?(API::StackOverflow::Tag.new("name" => "html")).should be_true }
     it { @tags_related.include?(API::StackOverflow::Tag.new("name" => "tagada")).should be_false }
   end
+
+  describe "get synonyms" do    
+    before(:all) do
+      @synonyms = API::StackOverflow.get_synonyms({page:1})
+    end
+    it { @synonyms.should_not be_nil}
+    it { @synonyms.count.should > 0}
+  end
+
 end
