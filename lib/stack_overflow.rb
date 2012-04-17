@@ -67,7 +67,7 @@ module API
 
       result = get(@@URL + "tags/synonyms?key=#{@@API_KEY}&page=#{page}&order=desc&sort=applied&site=#{site}")
       result["items"].map{|t| 
-        item  = Item.new(from_tag:t["from_tag"], to_tag:t["from_tag"])
+        item  = Item.new(from_tag:t["from_tag"], to_tag:t["to_tag"])
         item
       }
     end
