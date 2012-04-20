@@ -3,6 +3,7 @@ require 'json'
 require 'question'
 require 'answer'
 require 'tag'
+require 'related_tag'
 require 'item'
 
 module API
@@ -83,7 +84,7 @@ module API
     def self.get_tags_related(tag, options={})
       site = options[:site] || "stackoverflow"
       result = get(URI.escape(@@URL + "tags/#{tag}/related?key=#{@@API_KEY}&site=#{site}"))
-      result["items"].map{|t| Tag.new(t)}      
+      result["items"].map{|t| RelatedTag.new(t)}      
     end
   end
 end
